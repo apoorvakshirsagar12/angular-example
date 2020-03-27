@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <h4></h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table" *ngIf='locationDetails && locationDetails.length'>
+                <thead>
+                    <tr>
+                        <th>Load Origin</th>
+                        <th>Trailer Prefix</th>
+                        <th>Trailer Number</th>
+                        <th colspan="3">Next Load Point List (NLP Id:NLP Count)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let locationDetail of locationDetails'>
+                        <td>{{locationDetail.loadOirigin}}</td>
+                        <td>{{locationDetail.trailerPrefix}}</td>
+                        <td>{{locationDetail.trailerNmbr}}</td>
+                        <td *ngFor='let nlp of locationDetail.NextLoadPointList'>
+                                {{nlp.nlpId}}:{{nlp.nlpCount}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
