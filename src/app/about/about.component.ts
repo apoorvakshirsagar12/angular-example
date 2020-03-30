@@ -16,19 +16,27 @@ export class AboutComponent{
   lstDetails: DvmResp[];
   reqId: number;
   count: number;
-  temp: NextLoadPoint[];
+
   onIdKeyUp(event:any){
     this.reqId= event.target.value;
   }
   
   getCommentsByParameter(){
-    this.httpClient.get(`http://www.mocky.io/v2/5e8230d62f000050002fb95a`)
+    
+    if(!this.reqId){
+     document.getElementById("msg").innerHTML = "Location ID is empty";
+    }else if(isNaN(this.reqId)){
+      document.getElementById("msg").innerHTML = "Invalid Location ID";
+     }
+    else{
+      document.getElementById("msg").innerHTML = "";
+      this.httpClient.get(`http://www.mocky.io/v2/5e8230d62f000050002fb95a`)
     .subscribe(
       (data:any)=>{
        this.lstDetails = data.handlingUnitDueList
-       console.log(this.lstDetails);
       }
     );
+    }
   }
 
 }

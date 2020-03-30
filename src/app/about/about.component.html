@@ -3,7 +3,7 @@
             <div class="row" style="padding-bottom: 1%;">
                 <div class="col-md-1" style="padding-right: 0%;">Location Id*:</div>
                 <div class="col-md-2" style="padding-left: 0%;">
-                    <input type="text" (keyup)= "onIdKeyUp($event)" required />
+                    <input type="text" (keyup)= "onIdKeyUp($event)" />
                 </div>
                 <div class="col-md-1" style="padding-right: 0%;">Sort:</div>
                 <div class="col-md-1" style="padding-left: 0%;">
@@ -20,6 +20,9 @@
                 </div>
                 <div class="col-md-1">
                     <input type="button" (click)="getCommentsByParameter()" value="Submit"/>
+                </div>
+                <div class="col-md-1">
+                    <p id="msg" style="color: red;"></p>
                 </div>
             </div>
           </form>
@@ -39,7 +42,7 @@
                         <td>{{detail.trailerPrefix}}</td>
                         <td>{{detail.trailerNmbr}}</td>
                         <td *ngFor='let nextloadpoint of detail.NextLoadPointList'>
-                            {{nextloadpoint.nlpId}}:{{nextloadpoint.nlpCount}}
+                           {{nextloadpoint.nlpId}}:{{nextloadpoint.nlpCount}}
                         </td> 
                     </tr>
                 </tbody>
