@@ -1,38 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { Posts } from '../classes/posts';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent{
 
-  constructor() { }
-  pageTitle: String = 'Location Data fetched for location:';
-  locationDetails: any[] = [
-        {
-            "loadOirigin": 89, 
-            "trailerPrefix": "RPS", 
-            "trailerNmbr": "123456", 
-            "NextLoadPointList": [ 
-            {"nlpId":"6104","nlpCount":"300"}, 
-            {"nlpId":"6125","nlpCount":"205"}, 
-            {"nlpId":"6145","nlpCount":"0"} 
-            ] 
-        },
-        {
-            "loadOirigin": 132, 
-            "trailerPrefix": "RPS", 
-            "trailerNmbr": "123456", 
-            "NextLoadPointList": [ 
-            {"nlpId":"6104","nlpCount":"300"}, 
-            {"nlpId":"6125","nlpCount":"205"}, 
-            {"nlpId":"6145","nlpCount":"0"} 
-            ] 
-        }
-    ];
+  constructor(private httpClient: HttpClient){ }
 
-  ngOnInit(): void {
+  lstPosts: Posts[];
+  reqId: number;
+  onIdKeyUp(event:any){
+    this.reqId= event.target.value;
+  }
+  
+  getCommentsByParameter(){
+    this.httpClient.get(`https://jsonplaceholder.typicode.com/posts?id=${this.reqId}`)
+    .subscribe(
+      (data:any[])=>{
+        console.log(data.length);
+        this.lstPosts = data;
+      }
+    );
   }
 
 }
